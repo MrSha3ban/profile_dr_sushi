@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Sushi | Official Link-in-Bio & Contact Hub</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Cinzel, Noto Serif JP, Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Noto+Serif+JP:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['Cinzel', 'serif'],
+            jp: ['"Noto Serif JP"', 'serif'],
+          },
+          colors: {
+            sumi: {
+              950: '#08070a',
+              900: '#0f0d14',
+              800: '#181522',
+              700: '#231f30',
+            },
+            gold: {
+              300: '#fef08a',
+              400: '#facc15',
+              500: '#d4af37',
+              600: '#b89324',
+              700: '#8c6b12',
+            },
+            vermilion: {
+              500: '#ff2e4c',
+              600: '#e11d48',
+              700: '#be123c',
+            },
+            vodafone: '#e60000',
+          },
+          animation: {
+            'gold-shimmer': 'goldShimmer 3s infinite linear',
+            'pulse-subtle': 'pulseSubtle 3s infinite ease-in-out',
+            'float-slow': 'float 5s infinite ease-in-out',
+            'spin-slow': 'spin 20s linear infinite',
+            'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+          },
+          keyframes: {
+            goldShimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' },
+            },
+            pulseSubtle: {
+              '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+              '50%': { opacity: '0.85', transform: 'scale(1.02)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-8px)' },
+            },
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Dark Luxury Zen Styling */
+    body {
+      background-color: #08070a;
+      color: #f3f4f6;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+
+    /* Sumi Ink Pattern Overlay */
+    .zen-pattern-bg {
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1) 0%, transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(225, 29, 72, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 0% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
+    }
+
+    /* Glassmorphism Luxury Cards */
+    .glass-zen {
+      background: rgba(15, 13, 20, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
+    }
+
+    .glass-zen-hover {
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-zen-hover:hover {
+      transform: translateY(-3px);
+      border-color: rgba(212, 175, 55, 0.45);
+      box-shadow: 0 15px 35px -5px rgba(212, 175, 55, 0.2), 0 0 15px rgba(212, 175, 55, 0.1);
+    }
+
+    /* Gold Metallic Gradient Text */
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fff7d6 0%, #d4af37 40%, #facc15 70%, #997415 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Shimmering Gold Button Border */
+    .gold-shimmer-btn {
+      background: linear-gradient(90deg, #997415 0%, #facc15 25%, #ffffff 50%, #facc15 75%, #997415 100%);
+      background-size: 200% auto;
+      animation: goldShimmer 4s linear infinite;
+    }
+
+    /* Interactive Tilt & Ripple */
+    .active-scale:active {
+      transform: scale(0.98);
+    }
+
+    /* Canvas overlay */
+    #zen-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Hide Scrollbars */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+
+<body class="zen-pattern-bg min-h-screen antialiased selection:bg-gold-500 selection:text-black flex flex-col justify-between">
+
+  <!-- Interactive Background Canvas (Golden Embers & Zen Wave Rings) -->
+  <canvas id="zen-canvas"></canvas>
+
+  <!-- Background Decorative Kanji Watermarks -->
+  <div class="fixed top-12 -right-8 text-[16rem] font-jp font-black text-gold-500/[0.02] select-none pointer-events-none z-0">
+    寿司
+  </div>
+  <div class="fixed bottom-12 -left-8 text-[14rem] font-jp font-black text-vermilion-600/[0.02] select-none pointer-events-none z-0">
+    極味
+  </div>
+
+  <!-- MAIN WRAPPER CONTAINER -->
+  <main class="relative z-10 max-w-md mx-auto w-full min-h-screen px-4 py-6 flex flex-col justify-between">
+
+    <!-- TOP BAR / ACTION UTILITIES -->
+    <header class="flex items-center justify-between mb-6 animate-fade-in-up" style="animation-delay: 0.1s;">
+      <!-- Japanese Brand Tag -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sumi-900/80 border border-gold-500/20 text-xs text-gray-300 backdrop-blur-md">
+        <span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span>
+        <span class="font-jp text-gold-400 font-bold tracking-widest">ドクター寿司</span>
+        <span class="text-gray-400 font-mono text-[11px]">| Profile</span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <!-- Sound Effect Toggle -->
+        <button id="sound-btn" onclick="toggleAudio()" class="p-2.5 rounded-full bg-sumi-900/80 border border-gold-500/20 text-gray-300 hover:text-gold-400 hover:border-gold-500/40 transition-all duration-300 active-scale" title="Toggle Sound Chime">
+          <svg id="sound-icon-on" class="w-4 h-4 hidden text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+          <svg id="sound-icon-off" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path></svg>
+        </button>
+
+        <!-- QR Code Share Drawer Button -->
+        <button onclick="openModal('qr-modal')" class="p-2.5 rounded-full bg-sumi-900/80 border border-gold-500/20 text-gray-300 hover:text-gold-400 hover:border-gold-500/40 transition-all duration-300 active-scale flex items-center justify-center" title="Share Page & QR">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+        </button>
+      </div>
+    </header>
+
+
+    <!-- HERO PROFILE HEADER SECTION -->
+    <section class="text-center mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
+      
+      <!-- LOGO CONTAINER WITH GOLD METALLIC FRAME & FALLBACK LOGO SVG -->
+      <div class="relative w-32 h-32 mx-auto mb-4 group cursor-pointer" onclick="handleLogoClick()">
+        <!-- Outer Glowing Metallic Ring -->
+        <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-gold-600 via-gold-400 to-vermilion-600 animate-spin-slow opacity-80 blur-md group-hover:opacity-100 transition-opacity"></div>
+        
+        <!-- Metallic Frame Ring -->
+        <div class="relative w-full h-full rounded-full bg-sumi-900 p-1.5 border-2 border-gold-500/60 shadow-2xl flex items-center justify-center overflow-hidden">
+          
+          <!-- Direct Facebook Image Avatar (with seamless Vector SVG fallback) -->
+          <img id="dr-sushi-logo" 
+               src="https://graph.facebook.com/1FeA9yYu1g/picture?type=large" 
+               alt="Dr. Sushi Restaurant Logo" 
+               class="w-full h-full object-cover rounded-full transform group-hover:scale-105 transition-transform duration-500"
+               onerror="loadLogoFallback(this)"/>
+
+          <!-- High Precision Vector SVG Emblem Fallback Container -->
+          <div id="svg-logo-fallback" class="hidden w-full h-full rounded-full bg-sumi-950 flex items-center justify-center p-2">
+            <svg class="w-20 h-20 text-gold-400" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="60" cy="60" r="54" stroke="currentColor" stroke-width="2" stroke-dasharray="4 2"/>
+              <!-- Stethoscope / Chopsticks Cross -->
+              <path d="M35 35L85 85" stroke="#facc15" stroke-width="4" stroke-linecap="round"/>
+              <path d="M85 35L35 85" stroke="#facc15" stroke-width="4" stroke-linecap="round"/>
+              <!-- Doctor Cross Accent -->
+              <rect x="53" y="30" width="14" height="60" rx="3" fill="#e11d48"/>
+              <rect x="30" y="53" width="60" height="14" rx="3" fill="#e11d48"/>
+              <!-- Core Sushi Roll -->
+              <circle cx="60" cy="60" r="24" fill="#08070a" stroke="#fff" stroke-width="2.5"/>
+              <circle cx="60" cy="60" r="18" fill="#181522"/>
+              <circle cx="60" cy="60" r="8" fill="#ff2e4c"/>
+              <circle cx="60" cy="60" r="4" fill="#facc15"/>
+            </svg>
+          </div>
+
+          <!-- Bottom Metallic Badge -->
+          <div class="absolute bottom-1 inset-x-0 bg-sumi-950/90 py-0.5 border-t border-gold-500/30 text-[9px] font-bold tracking-widest text-gold-400 uppercase text-center font-mono">
+            DR. SUSHI
+          </div>
+        </div>
+      </div>
+
+      <!-- Restaurant Brand Name -->
+      <h1 class="font-serif text-3xl font-black tracking-wider text-white mb-1 flex items-center justify-center gap-2">
+        <span class="gold-gradient-text">DR. SUSHI</span>
+        <span class="text-xs px-2 py-0.5 rounded-full bg-vermilion-600/20 text-vermilion-500 border border-vermilion-600/30 font-sans font-semibold">EST.</span>
+      </h1>
+      
+      <p class="text-xs font-sans text-gray-300 tracking-wide max-w-xs mx-auto mb-3">
+        Artisan Japanese Cuisine & Signature Roll Craftsmanship
+      </p>
+
+      <!-- Live Status Pill -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 text-xs font-medium backdrop-blur-sm">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+        </span>
+        <span>Taking Orders • Direct Delivery Available</span>
+      </div>
+
+    </section>
+
+
+    <!-- FEATURED PRIMARY CTA BUTTON (LINKING TO GITHUB IO WEBAPP) -->
+    <section class="mb-6 animate-fade-in-up" style="animation-delay: 0.3s;">
+      <a href="https://mrsha3ban.github.io/DR_SUSHI/" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         onclick="playChimeSound(650, 0.12)"
+         class="relative group block p-0.5 rounded-2xl gold-shimmer-btn shadow-2xl transition-transform duration-300 hover:scale-[1.02] active-scale">
+        
+        <!-- Inner Button Card -->
+        <div class="bg-gradient-to-r from-sumi-950 via-sumi-900 to-sumi-950 p-4 rounded-[14px] flex items-center justify-between relative overflow-hidden">
+          
+          <!-- Ambient Glow Background inside CTA -->
+          <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-gold-500/10 rounded-full blur-2xl group-hover:bg-gold-500/20 transition-all"></div>
+
+          <div class="flex items-center gap-4 relative z-10">
+            <!-- Icon Container with Animated Pulsing Ring -->
+            <div class="w-13 h-13 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 p-3 flex items-center justify-center text-black shadow-lg group-hover:rotate-6 transition-transform">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+              </svg>
+            </div>
+
+            <div class="text-left">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold font-mono uppercase tracking-widest text-gold-400">Official Webshop</span>
+                <span class="px-1.5 py-0.2 rounded text-[9px] font-extrabold bg-vermilion-600 text-white tracking-wider animate-pulse">MENU</span>
+              </div>
+              <h2 class="font-serif text-lg font-bold text-white group-hover:text-gold-300 transition-colors">
+                Order Online / View Full Menu
+              </h2>
+              <p class="text-[11px] text-gray-300">Tap to explore complete menu & order online</p>
+            </div>
+          </div>
+
+          <!-- Arrow Action Icon -->
+          <div class="relative z-10 w-9 h-9 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:bg-gold-500 group-hover:text-black transition-all">
+            <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </div>
+
+        </div>
+      </a>
+    </section>
+
+
+    <!-- SOCIAL & CONTACT ACTION LINKS STACK -->
+    <section class="space-y-3.5 mb-8 animate-fade-in-up" style="animation-delay: 0.4s;">
+
+      <!-- WHATSAPP DIRECT LINK -->
+      <a href="https://wa.me/201034707935?text=Hello%20Dr.%20Sushi!%20I%20would%20like%20to%20inquire%20about%20ordering." 
+         target="_blank" 
+         rel="noopener noreferrer"
+         onclick="playChimeSound(600, 0.1)"
+         class="glass-zen glass-zen-hover p-4 rounded-2xl flex items-center justify-between group border-l-4 border-l-emerald-500 active-scale">
+        <div class="flex items-center gap-3.5">
+          <div class="w-11 h-11 rounded-xl bg-emerald-950/60 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
+            <!-- WhatsApp Vector Icon -->
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+              <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.758.459 3.474 1.33 4.982l-1.413 5.163 5.286-1.387c1.455.794 3.097 1.213 4.783 1.214h.004c5.506 0 9.99-4.478 9.99-9.985 0-2.667-1.038-5.176-2.925-7.061A9.919 9.919 0 0012.012 2zm0 18.288h-.003a8.293 8.293 0 01-4.227-1.163l-.303-.18-3.14.823.837-3.064-.197-.314a8.27 8.27 0 01-1.267-4.406c0-4.57 3.719-8.288 8.29-8.288 2.214 0 4.296.863 5.86 2.429a8.237 8.237 0 012.423 5.863c.001 4.571-3.717 8.29-8.286 8.29zm4.542-6.205c-.249-.125-1.474-.728-1.703-.811-.229-.083-.396-.125-.562.125-.166.249-.646.811-.791.978-.146.166-.292.187-.541.062-.249-.125-1.054-.388-2.007-1.238-.742-.662-1.243-1.48-1.389-1.73-.146-.249-.015-.384.109-.507.112-.112.249-.292.374-.438.125-.146.166-.249.249-.416.083-.166.042-.312-.021-.437-.062-.125-.562-1.354-.77-1.854-.203-.487-.41-.421-.562-.429l-.479-.008c-.166 0-.437.062-.666.312-.229.249-.874.854-.874 2.083 0 1.229.896 2.417 1.021 2.583.125.166 1.763 2.693 4.272 3.777.597.258 1.063.412 1.426.528.6.19 1.146.163 1.577.099.481-.072 1.474-.603 1.682-1.186.208-.583.208-1.083.146-1.186-.062-.104-.229-.167-.478-.292z"/>
+            </svg>
+          </div>
+          <div class="text-left">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-white text-sm">WhatsApp Direct Chat</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-400 font-mono">01034707935</span>
+            </div>
+            <div class="text-xs text-gray-300">Tap to chat & place fast order directly</div>
+          </div>
+        </div>
+        <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </a>
+
+
+      <!-- VODAFONE CASH PAYMENT CARD -->
+      <div class="glass-zen glass-zen-hover p-4 rounded-2xl border-l-4 border-l-vodafone group">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3.5">
+            <div class="w-11 h-11 rounded-xl bg-red-950/60 border border-red-600/40 flex items-center justify-center text-vodafone group-hover:scale-110 transition-transform">
+              <!-- Vodafone Symbol SVG -->
+              <svg class="w-6 h-6 fill-current text-vodafone" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" fill="#e60000" opacity="0.25"/>
+                <path d="M12 4C7.58 4 4 7.58 4 12c0 4.42 3.58 8 8 8s8-3.58 8-8c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-3.31 2.69-6 6-6s6 2.69 6 6c0 3.31-2.69 6-6 6z" fill="#e60000"/>
+                <path d="M13.5 9.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5.67 1.5 1.5 1.5 1.5-.67 1.5-1.5z" fill="#fff"/>
+              </svg>
+            </div>
+            <div class="text-left">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-white text-sm">Vodafone Cash</span>
+                <span class="text-[10px] px-1.5 py-0.2 rounded bg-red-900/40 text-red-300 font-mono border border-red-500/30">01034707935</span>
+              </div>
+              <div class="text-xs text-gray-300">Fast wallet payments & transfers</div>
+            </div>
+          </div>
+
+          <!-- Vodafone Quick Action Buttons -->
+          <div class="flex items-center gap-1.5">
+            <button onclick="copyVodafoneNumber('01034707935')" 
+                    class="p-2 rounded-xl bg-white/5 hover:bg-vodafone hover:text-white text-gray-300 transition-all border border-white/10 active-scale" 
+                    title="Copy Vodafone Cash Number">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 012-2v-8a2 2 0 01-2-2h-8a2 2 0 01-2 2v8a2 2 0 012 2z"></path></svg>
+            </button>
+            <button onclick="openModal('vodafone-modal')" 
+                    class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gold-400 transition-all border border-white/10 text-xs font-semibold active-scale">
+              Guide
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- INSTAGRAM LINK -->
+      <a href="https://www.instagram.com/p/Df-djg6O8c3/?bqrl=MWo4ZHg3MGRibTVjMQ==" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         onclick="playChimeSound(700, 0.1)"
+         class="glass-z
