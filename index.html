@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="dark">
+<html lang="en" dir="ltr" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Dr. Sushi | مطعم دكتور سوشي - Official Profile & Order Hub</title>
+  <title>Dr. Sushi | Official Profile & Order Hub</title>
   
-  <!-- SEO & Open Graph Meta Tags for Social Sharing (WhatsApp, Facebook, Twitter) -->
+  <!-- SEO & Open Graph Meta Tags -->
   <meta name="description" content="Official profile link hub for Dr. Sushi restaurant. Order online, message on WhatsApp, or pay via Vodafone Cash.">
-  <meta property="og:title" content="Dr. Sushi • مطعم دكتور سوشي">
+  <meta property="og:title" content="Dr. Sushi • Official Hub">
   <meta property="og:description" content="Artisan Japanese Cuisine & Fresh Sushi Rolls. Tap to view menu & order online!">
   <meta property="og:image" content="logo.jpg">
   <meta property="og:type" content="website">
@@ -16,7 +16,7 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts: Cairo (Arabic), Cinzel (Luxury Serif), Plus Jakarta Sans -->
+  <!-- Google Fonts: Cairo (Arabic), Cinzel & Plus Jakarta Sans (English/Serif), Noto Serif JP -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Cinzel:wght@600;700;900&family=Noto+Serif+JP:wght@700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,8 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Cairo"', '"Plus Jakarta Sans"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', '"Cairo"', 'sans-serif'],
+            cairo: ['"Cairo"', 'sans-serif'],
             serif: ['Cinzel', 'serif'],
             jp: ['"Noto Serif JP"', 'serif'],
           },
@@ -47,9 +48,9 @@
               700: '#8a6a12',
             },
             vermilion: {
-              500: '#ff334b',
-              600: '#e62e43',
-              700: '#c21d31',
+              500: '#e11d48',
+              600: '#be123c',
+              700: '#9f1239',
             },
             vodafone: '#e60000',
           },
@@ -58,7 +59,6 @@
             'float-slow': 'float 5s ease-in-out infinite',
             'spin-slow': 'spin 22s linear infinite',
             'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-            'pulse-glow': 'pulseGlow 2.5s infinite ease-in-out',
           },
           keyframes: {
             goldShimmer: {
@@ -72,10 +72,6 @@
             fadeInUp: {
               '0%': { opacity: '0', transform: 'translateY(18px)' },
               '100%': { opacity: '1', transform: 'translateY(0)' },
-            },
-            pulseGlow: {
-              '0%, 100%': { boxShadow: '0 0 15px rgba(212, 175, 55, 0.2)' },
-              '50%': { boxShadow: '0 0 30px rgba(212, 175, 55, 0.5)' },
             }
           }
         }
@@ -91,15 +87,15 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Ambient Japanese Zen Pattern Gradient */
+    /* Ambient Zen Gradient */
     .zen-pattern {
       background-image: 
         radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
-        radial-gradient(circle at 100% 100%, rgba(230, 46, 67, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 100% 100%, rgba(225, 29, 72, 0.08) 0%, transparent 45%),
         radial-gradient(circle at 0% 50%, rgba(212, 175, 55, 0.06) 0%, transparent 40%);
     }
 
-    /* Glassmorphism Luxury Styling */
+    /* Glassmorphism Cards */
     .glass-card {
       background: rgba(14, 12, 18, 0.78);
       backdrop-filter: blur(20px);
@@ -125,7 +121,7 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* Shimmering Gold Button Border */
+    /* Shimmering Gold Button */
     .gold-shimmer-btn {
       background: linear-gradient(90deg, #8a6a12 0%, #facc15 25%, #ffffff 50%, #facc15 75%, #8a6a12 100%);
       background-size: 200% auto;
@@ -145,53 +141,68 @@
       pointer-events: none;
       z-index: 1;
     }
+
+    /* Dynamic Arabic Font Overlay */
+    html[lang="ar"] body {
+      font-family: 'Cairo', sans-serif;
+    }
   </style>
 </head>
 
 <body class="zen-pattern min-h-screen antialiased selection:bg-gold-500 selection:text-black flex flex-col justify-between">
 
-  <!-- Interactive Background Canvas (Rising Golden Embers) -->
+  <!-- Interactive Background Canvas (Golden Embers) -->
   <canvas id="ember-canvas"></canvas>
 
   <!-- Background Decorative Kanji Watermarks -->
   <div class="fixed top-10 right-4 text-[15rem] font-jp font-black text-gold-500/[0.02] select-none pointer-events-none z-0">
     寿司
   </div>
-  <div class="fixed bottom-10 left-4 text-[13rem] font-jp font-black text-vermilion-600/[0.02] select-none pointer-events-none z-0">
+  <div class="fixed bottom-10 left-4 text-[13rem] font-jp font-black text-vermilion-500/[0.02] select-none pointer-events-none z-0">
     極味
   </div>
 
-  <!-- MAIN WRAPPER CONTAINER -->
+  <!-- MAIN CONTAINER -->
   <main class="relative z-10 max-w-md mx-auto w-full min-h-screen px-4 py-5 flex flex-col justify-between">
 
     <!-- TOP HEADER UTILITIES -->
     <header class="flex items-center justify-between mb-5 animate-fade-in-up" style="animation-delay: 0.1s;">
-      <!-- Japanese Brand Tag -->
+      
+      <!-- Brand Tag -->
       <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sumi-900/80 border border-gold-500/25 text-xs text-gray-200 backdrop-blur-md">
         <span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span>
         <span class="font-jp text-gold-400 font-bold tracking-widest text-[11px]">ドクター寿司</span>
         <span class="text-gray-400 font-mono text-[10px]">| Hub</span>
       </div>
 
+      <!-- Header Controls: Language Switcher + Sound Toggle + QR Share -->
       <div class="flex items-center gap-2">
-        <!-- Audio Sound Chime Toggle -->
-        <button id="sound-btn" onclick="toggleAudio()" class="p-2.5 rounded-full bg-sumi-900/80 border border-gold-500/20 text-gray-300 hover:text-gold-400 hover:border-gold-500/40 transition-all duration-300 active-scale" title="Toggle Sound Effects">
+        
+        <!-- Language Switcher Pill -->
+        <button id="lang-btn" onclick="toggleLanguage()" class="px-3 py-1.5 rounded-full bg-sumi-900/90 border border-gold-500/30 text-gold-400 hover:bg-gold-500/10 transition-all text-xs font-bold flex items-center gap-1.5 active-scale" title="Switch Language / تغيير اللغة">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
+          <span id="lang-btn-text">العربية</span>
+        </button>
+
+        <!-- Sound Chime Toggle -->
+        <button id="sound-btn" onclick="toggleAudio()" class="p-2.5 rounded-full bg-sumi-900/80 border border-gold-500/20 text-gray-300 hover:text-gold-400 hover:border-gold-500/40 transition-all active-scale" title="Toggle Sound">
           <svg id="sound-icon-on" class="w-4 h-4 hidden text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
           <svg id="sound-icon-off" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path></svg>
         </button>
 
-        <!-- QR Code Share Drawer Button -->
-        <button onclick="openModal('qr-modal')" class="p-2.5 rounded-full bg-sumi-900/80 border border-gold-500/20 text-gray-300 hover:text-gold-400 hover:border-gold-500/40 transition-all duration-300 active-scale flex items-center justify-center" title="Share Page & QR">
+        <!-- QR Code Drawer Button -->
+        <button onclick="openModal('qr-modal')" class="p-2.5 rounded-full bg-sumi-900/80 border border-gold-500/20 text-gray-300 hover:text-gold-400 hover:border-gold-500/40 transition-all active-scale flex items-center justify-center" title="Share & QR">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
         </button>
+
       </div>
     </header>
 
 
-    <!-- HERO PROFILE HEADER SECTION -->
+    <!-- HERO PROFILE HEADER -->
     <section class="text-center mb-5 animate-fade-in-up" style="animation-delay: 0.2s;">
       
-      <!-- LOGO CONTAINER WITH 3-LEVEL FALLBACK SYSTEM (logo.jpg -> logo.png -> SVG) -->
+      <!-- LOGO CONTAINER (logo.jpg -> logo.png -> Inline Japanese SVG Emblem) -->
       <div class="relative w-32 h-32 mx-auto mb-3.5 group cursor-pointer" onclick="handleLogoClick()">
         <!-- Outer Glowing Metallic Ring -->
         <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-gold-600 via-gold-400 to-vermilion-600 animate-spin-slow opacity-80 blur-md group-hover:opacity-100 transition-opacity"></div>
@@ -199,24 +210,23 @@
         <!-- Frame Ring -->
         <div class="relative w-full h-full rounded-full bg-sumi-900 p-1.5 border-2 border-gold-500/70 shadow-2xl flex items-center justify-center overflow-hidden">
           
-          <!-- Primary Image (Tries logo.jpg first, then logo.png on error, then SVG fallback) -->
           <img id="dr-sushi-logo" 
                src="logo.jpg" 
-               alt="Dr. Sushi Restaurant Logo" 
+               alt="Dr. Sushi Logo" 
                class="w-full h-full object-cover rounded-full transform group-hover:scale-105 transition-transform duration-500"
                onerror="handleImageError(this)"/>
 
-          <!-- High Precision Vector SVG Emblem Fallback Container -->
+          <!-- SVG Emblem Fallback -->
           <div id="svg-logo-fallback" class="hidden w-full h-full rounded-full bg-sumi-950 items-center justify-center p-2">
             <svg class="w-20 h-20 text-gold-400" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="60" cy="60" r="54" stroke="currentColor" stroke-width="2" stroke-dasharray="4 2"/>
               <path d="M35 35L85 85" stroke="#facc15" stroke-width="4" stroke-linecap="round"/>
               <path d="M85 35L35 85" stroke="#facc15" stroke-width="4" stroke-linecap="round"/>
-              <rect x="53" y="30" width="14" height="60" rx="3" fill="#e62e43"/>
-              <rect x="30" y="53" width="60" height="14" rx="3" fill="#e62e43"/>
+              <rect x="53" y="30" width="14" height="60" rx="3" fill="#e11d48"/>
+              <rect x="30" y="53" width="60" height="14" rx="3" fill="#e11d48"/>
               <circle cx="60" cy="60" r="24" fill="#070609" stroke="#fff" stroke-width="2.5"/>
               <circle cx="60" cy="60" r="18" fill="#15121b"/>
-              <circle cx="60" cy="60" r="8" fill="#ff334b"/>
+              <circle cx="60" cy="60" r="8" fill="#e11d48"/>
               <circle cx="60" cy="60" r="4" fill="#facc15"/>
             </svg>
           </div>
@@ -229,13 +239,13 @@
       </div>
 
       <!-- Restaurant Brand Name -->
-      <h1 class="font-serif text-3xl font-black tracking-wider text-white mb-1 flex items-center justify-center gap-2 dir-ltr">
-        <span class="gold-gradient-text">DR. SUSHI</span>
-        <span class="text-xs font-sans px-2 py-0.5 rounded-full bg-vermilion-600/20 text-vermilion-500 border border-vermilion-600/30 font-semibold">دكتور سوشي</span>
+      <h1 class="font-serif text-3xl font-black tracking-wider text-white mb-1 flex items-center justify-center gap-2 ltr:flex-row rtl:flex-row-reverse">
+        <span class="gold-gradient-text font-serif">DR. SUSHI</span>
+        <span class="text-xs font-sans px-2 py-0.5 rounded-full bg-vermilion-500/20 text-vermilion-500 border border-vermilion-500/30 font-semibold" data-i18n="brandBadge">دكتور سوشي</span>
       </h1>
       
-      <p class="text-xs font-sans text-gray-300 tracking-wide max-w-xs mx-auto mb-2.5 leading-relaxed">
-        أرقى تجربة سوشي ياباني • طعم الروعة والاحترافية
+      <p class="text-xs text-gray-300 tracking-wide max-w-xs mx-auto mb-2.5 leading-relaxed" data-i18n="tagline">
+        Artisan Japanese Cuisine • Unmatched Elegance
       </p>
 
       <!-- Live Status Pill -->
@@ -244,13 +254,13 @@
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
         </span>
-        <span>مفتوح لاستقبال الطلبات • توصيل سريع</span>
+        <span data-i18n="status">Open for Orders • Express Delivery</span>
       </div>
 
     </section>
 
 
-    <!-- FEATURED PRIMARY CTA BUTTON (ORDER ONLINE) -->
+    <!-- FEATURED PRIMARY CTA (ORDER ONLINE) -->
     <section class="mb-5 animate-fade-in-up" style="animation-delay: 0.3s;">
       <a href="https://mrsha3ban.github.io/DR_SUSHI/" 
          target="_blank" 
@@ -258,35 +268,31 @@
          onclick="playChimeSound(680, 0.12)"
          class="relative group block p-0.5 rounded-2xl gold-shimmer-btn shadow-2xl transition-transform duration-300 hover:scale-[1.02] active-scale">
         
-        <!-- Inner Button Card -->
         <div class="bg-gradient-to-r from-sumi-950 via-sumi-900 to-sumi-950 p-4 rounded-[14px] flex items-center justify-between relative overflow-hidden">
           
-          <!-- Ambient Glow Background inside CTA -->
           <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-gold-500/10 rounded-full blur-2xl group-hover:bg-gold-500/20 transition-all"></div>
 
           <div class="flex items-center gap-3.5 relative z-10">
-            <!-- Icon Container with Animated Pulsing Ring -->
             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 p-2.5 flex items-center justify-center text-black shadow-lg group-hover:rotate-6 transition-transform">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
               </svg>
             </div>
 
-            <div class="text-right">
+            <div class="ltr:text-left rtl:text-right">
               <div class="flex items-center gap-2">
-                <span class="text-xs font-bold text-gold-400">المتجر الإلكتروني</span>
-                <span class="px-1.5 py-0.2 rounded text-[9px] font-extrabold bg-vermilion-600 text-white tracking-wider animate-pulse">ORDER NOW</span>
+                <span class="text-xs font-bold text-gold-400" data-i18n="mainCtaSub">Online Store & Menu</span>
+                <span class="px-1.5 py-0.2 rounded text-[9px] font-extrabold bg-vermilion-500 text-white tracking-wider animate-pulse" data-i18n="mainCtaBadge">ORDER NOW</span>
               </div>
-              <h2 class="font-bold text-base text-white group-hover:text-gold-300 transition-colors">
-                اطلب أونلاين / تصفح المنيو الكامل
+              <h2 class="font-bold text-base text-white group-hover:text-gold-300 transition-colors" data-i18n="mainCtaTitle">
+                Order Online / Browse Full Menu
               </h2>
-              <p class="text-[11px] text-gray-300">اضغط هنا لاستعراض قائمة الطعام والطلب المباشر</p>
+              <p class="text-[11px] text-gray-300" data-i18n="mainCtaDesc">Tap here to explore our menu and order directly</p>
             </div>
           </div>
 
-          <!-- Arrow Action Icon -->
           <div class="relative z-10 w-9 h-9 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:bg-gold-500 group-hover:text-black transition-all">
-            <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 transform ltr:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
           </div>
@@ -296,36 +302,35 @@
     </section>
 
 
-    <!-- DIRECT LINKS & ACTION CARDS STACK -->
+    <!-- DIRECT LINKS & ACTION CARDS -->
     <section class="space-y-3 mb-6 animate-fade-in-up" style="animation-delay: 0.4s;">
 
-      <!-- WHATSAPP DIRECT LINK -->
-      <a href="https://wa.me/201034707935?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AF%D9%83%D8%AA%D9%88%D8%B1%20%D8%B3%D9%88%D8%B4%D9%8A%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8" 
+      <!-- WHATSAPP LINK -->
+      <a href="https://wa.me/201034707935?text=Hello%20Dr.%20Sushi,%20I%20would%20like%20to%20order" 
          target="_blank" 
          rel="noopener noreferrer"
          onclick="playChimeSound(600, 0.1)"
-         class="glass-card glass-card-hover p-3.5 rounded-2xl flex items-center justify-between group border-r-4 border-r-emerald-500 active-scale">
+         class="glass-card glass-card-hover p-3.5 rounded-2xl flex items-center justify-between group ltr:border-l-4 rtl:border-r-4 ltr:border-l-emerald-500 rtl:border-r-emerald-500 active-scale">
         <div class="flex items-center gap-3">
           <div class="w-11 h-11 rounded-xl bg-emerald-950/60 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
-            <!-- WhatsApp Vector Icon -->
             <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
               <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.758.459 3.474 1.33 4.982l-1.413 5.163 5.286-1.387c1.455.794 3.097 1.213 4.783 1.214h.004c5.506 0 9.99-4.478 9.99-9.985 0-2.667-1.038-5.176-2.925-7.061A9.919 9.919 0 0012.012 2zm0 18.288h-.003a8.293 8.293 0 01-4.227-1.163l-.303-.18-3.14.823.837-3.064-.197-.314a8.27 8.27 0 01-1.267-4.406c0-4.57 3.719-8.288 8.29-8.288 2.214 0 4.296.863 5.86 2.429a8.237 8.237 0 012.423 5.863c.001 4.571-3.717 8.29-8.286 8.29zm4.542-6.205c-.249-.125-1.474-.728-1.703-.811-.229-.083-.396-.125-.562.125-.166.249-.646.811-.791.978-.146.166-.292.187-.541.062-.249-.125-1.054-.388-2.007-1.238-.742-.662-1.243-1.48-1.389-1.73-.146-.249-.015-.384.109-.507.112-.112.249-.292.374-.438.125-.146.166-.249.249-.416.083-.166.042-.312-.021-.437-.062-.125-.562-1.354-.77-1.854-.203-.487-.41-.421-.562-.429l-.479-.008c-.166 0-.437.062-.666.312-.229.249-.874.854-.874 2.083 0 1.229.896 2.417 1.021 2.583.125.166 1.763 2.693 4.272 3.777.597.258 1.063.412 1.426.528.6.19 1.146.163 1.577.099.481-.072 1.474-.603 1.682-1.186.208-.583.208-1.083.146-1.186-.062-.104-.229-.167-.478-.292z"/>
             </svg>
           </div>
-          <div class="text-right">
+          <div class="ltr:text-left rtl:text-right">
             <div class="flex items-center gap-2">
-              <span class="font-bold text-white text-sm">محادثة واتساب مباشرة</span>
-              <span class="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-400 font-mono dir-ltr">01034707935</span>
+              <span class="font-bold text-white text-sm" data-i18n="waTitle">Direct WhatsApp Chat</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-400 font-mono">01034707935</span>
             </div>
-            <div class="text-xs text-gray-300">تواصل معنا واستفسر فوراً عبر الواتساب</div>
+            <div class="text-xs text-gray-300" data-i18n="waDesc">Contact us for orders & inquiries</div>
           </div>
         </div>
-        <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-400 group-hover:-translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-400 ltr:rotate-180 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
       </a>
 
 
-      <!-- VODAFONE CASH PAYMENT CARD -->
-      <div class="glass-card glass-card-hover p-3.5 rounded-2xl border-r-4 border-r-vodafone group">
+      <!-- VODAFONE CASH PAYMENT -->
+      <div class="glass-card glass-card-hover p-3.5 rounded-2xl ltr:border-l-4 rtl:border-r-4 ltr:border-l-vodafone rtl:border-r-vodafone group">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="w-11 h-11 rounded-xl bg-red-950/60 border border-red-600/40 flex items-center justify-center text-vodafone group-hover:scale-110 transition-transform">
@@ -334,25 +339,26 @@
                 <path d="M12 4C7.58 4 4 7.58 4 12c0 4.42 3.58 8 8 8s8-3.58 8-8c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-3.31 2.69-6 6-6s6 2.69 6 6c0 3.31-2.69 6-6 6z" fill="#e60000"/>
               </svg>
             </div>
-            <div class="text-right">
+            <div class="ltr:text-left rtl:text-right">
               <div class="flex items-center gap-2">
-                <span class="font-bold text-white text-sm">فودافون كاش (دفع)</span>
-                <span class="text-[10px] px-1.5 py-0.2 rounded bg-red-900/40 text-red-300 font-mono border border-red-500/30 dir-ltr">01034707935</span>
+                <span class="font-bold text-white text-sm" data-i18n="vodaTitle">Vodafone Cash (Payment)</span>
+                <span class="text-[10px] px-1.5 py-0.2 rounded bg-red-900/40 text-red-300 font-mono border border-red-500/30">01034707935</span>
               </div>
-              <div class="text-xs text-gray-300">تحويل المحفظة الإلكترونية والمبيعات</div>
+              <div class="text-xs text-gray-300" data-i18n="vodaDesc">Wallet transfer & direct payment</div>
             </div>
           </div>
-          <!-- Vodafone Quick Actions -->
+
           <div class="flex items-center gap-1.5">
             <button onclick="copyVodafoneNumber('01034707935')" 
                     class="p-2 rounded-xl bg-white/5 hover:bg-vodafone hover:text-white text-gray-300 transition-all border border-white/10 active-scale flex items-center gap-1 text-xs font-semibold" 
-                    title="نسخ رقم فودافون كاش">
+                    title="Copy Vodafone Cash Number">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 012-2v-8a2 2 0 01-2-2h-8a2 2 0 01-2 2v8a2 2 0 012 2z"></path></svg>
-              <span>نسخ</span>
+              <span data-i18n="vodaCopy">Copy</span>
             </button>
             <button onclick="openModal('vodafone-modal')" 
-                    class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gold-400 transition-all border border-white/10 text-xs font-semibold active-scale">
-              كود التحويل
+                    class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-gold-400 transition-all border border-white/10 text-xs font-semibold active-scale"
+                    data-i18n="vodaCodeBtn">
+              USSD Code
             </button>
           </div>
         </div>
@@ -364,7 +370,7 @@
          target="_blank" 
          rel="noopener noreferrer"
          onclick="playChimeSound(700, 0.1)"
-         class="glass-card glass-card-hover p-3.5 rounded-2xl flex items-center justify-between group border-r-4 border-r-pink-500 active-scale">
+         class="glass-card glass-card-hover p-3.5 rounded-2xl flex items-center justify-between group ltr:border-l-4 rtl:border-r-4 ltr:border-l-pink-500 rtl:border-r-pink-500 active-scale">
         <div class="flex items-center gap-3">
           <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 p-0.5 group-hover:scale-110 transition-transform">
             <div class="w-full h-full bg-sumi-900 rounded-[10px] flex items-center justify-center text-pink-400">
@@ -373,12 +379,12 @@
               </svg>
             </div>
           </div>
-          <div class="text-right">
-            <div class="font-bold text-white text-sm">حساب انستجرام الرسمي</div>
-            <div class="text-xs text-gray-300">صور الأطباق العصرية والستوريز اليومية</div>
+          <div class="ltr:text-left rtl:text-right">
+            <div class="font-bold text-white text-sm" data-i18n="instaTitle">Official Instagram Profile</div>
+            <div class="text-xs text-gray-300" data-i18n="instaDesc">Exquisite dishes & daily stories</div>
           </div>
         </div>
-        <svg class="w-5 h-5 text-gray-400 group-hover:text-pink-400 group-hover:-translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        <svg class="w-5 h-5 text-gray-400 group-hover:text-pink-400 ltr:rotate-180 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
       </a>
 
 
@@ -387,19 +393,19 @@
          target="_blank" 
          rel="noopener noreferrer"
          onclick="playChimeSound(550, 0.1)"
-         class="glass-card glass-card-hover p-3.5 rounded-2xl flex items-center justify-between group border-r-4 border-r-blue-500 active-scale">
+         class="glass-card glass-card-hover p-3.5 rounded-2xl flex items-center justify-between group ltr:border-l-4 rtl:border-r-4 ltr:border-l-blue-500 rtl:border-r-blue-500 active-scale">
         <div class="flex items-center gap-3">
           <div class="w-11 h-11 rounded-xl bg-blue-950/60 border border-blue-500/40 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
             <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
               <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
             </svg>
           </div>
-          <div class="text-right">
-            <div class="font-bold text-white text-sm">صفحة الفيسبوك الرسمية</div>
-            <div class="text-xs text-gray-300">عروض المطعم، التقييمات والأخبار</div>
+          <div class="ltr:text-left rtl:text-right">
+            <div class="font-bold text-white text-sm" data-i18n="fbTitle">Official Facebook Page</div>
+            <div class="text-xs text-gray-300" data-i18n="fbDesc">Offers, reviews, and latest news</div>
           </div>
         </div>
-        <svg class="w-5 h-5 text-gray-400 group-hover:text-blue-400 group-hover:-translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        <svg class="w-5 h-5 text-gray-400 group-hover:text-blue-400 ltr:rotate-180 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
       </a>
 
     </section>
@@ -408,11 +414,11 @@
     <!-- FOOTER -->
     <footer class="text-center pt-3 border-t border-gold-500/15 mt-auto animate-fade-in-up" style="animation-delay: 0.5s;">
       <div class="text-xs font-serif text-gold-400 tracking-widest uppercase mb-1">DR. SUSHI RESTAURANT</div>
-      <p class="text-[11px] text-gray-300">جميع الحقوق محفوظة © <span id="year-el">2026</span> دكتور سوشي</p>
+      <p class="text-[11px] text-gray-300"><span data-i18n="rights">All rights reserved ©</span> <span id="year-el">2026</span> Dr. Sushi</p>
       <div class="mt-2.5 text-[10px] text-gray-400 flex items-center justify-center gap-3">
-        <button onclick="copyToClipboard(window.location.href, 'تم نسخ رابط الصفحة بنجاح!')" class="underline hover:text-gold-400 transition-colors">نسخ رابط الرابط</button>
+        <button onclick="copyToClipboard(window.location.href)" class="underline hover:text-gold-400 transition-colors" data-i18n="copyLinkText">Copy Hub Link</button>
         <span>•</span>
-        <button onclick="openModal('qr-modal')" class="underline hover:text-gold-400 transition-colors">رمز QR</button>
+        <button onclick="openModal('qr-modal')" class="underline hover:text-gold-400 transition-colors" data-i18n="qrText">QR Code</button>
       </div>
     </footer>
 
@@ -421,8 +427,8 @@
 
   <!-- VODAFONE CASH MODAL -->
   <div id="vodafone-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity">
-    <div class="glass-card w-full max-w-sm rounded-3xl p-5 relative border border-vodafone/50 shadow-2xl animate-float-slow text-right">
-      <button onclick="closeModal('vodafone-modal')" class="absolute top-4 left-4 p-2 text-gray-400 hover:text-white rounded-full bg-white/5">
+    <div class="glass-card w-full max-w-sm rounded-3xl p-5 relative border border-vodafone/50 shadow-2xl animate-float-slow ltr:text-left rtl:text-right">
+      <button onclick="closeModal('vodafone-modal')" class="absolute top-4 ltr:right-4 rtl:left-4 p-2 text-gray-400 hover:text-white rounded-full bg-white/5">
         ✕
       </button>
 
@@ -434,31 +440,31 @@
           </svg>
         </div>
 
-        <h3 class="text-lg font-bold text-white mb-0.5">الدفع عبر فودافون كاش</h3>
-        <p class="text-xs text-gray-300 mb-3">حوالات واستلام مبيعات دكتور سوشي المباشرة</p>
+        <h3 class="text-lg font-bold text-white mb-0.5" data-i18n="vodaModalTitle">Pay via Vodafone Cash</h3>
+        <p class="text-xs text-gray-300 mb-3" data-i18n="vodaModalSub">Transfer directly to Dr. Sushi wallet</p>
 
-        <!-- Number Display Box -->
+        <!-- Number Box -->
         <div class="bg-sumi-950 border border-gold-500/25 rounded-2xl p-3 flex items-center justify-between mb-3.5 dir-ltr">
           <button onclick="copyVodafoneNumber('01034707935')" class="px-3.5 py-1.5 rounded-xl bg-vodafone text-white text-xs font-bold hover:bg-red-700 transition-colors active-scale">
             Copy / نسخ
           </button>
           <div class="text-right">
-            <div class="text-[9px] text-gray-400 font-mono">رقم المحفظة الإلكترونية</div>
+            <div class="text-[9px] text-gray-400 font-mono" data-i18n="vodaWalletLabel">Wallet Number</div>
             <div class="text-lg font-mono font-bold text-gold-400 tracking-wider">01034707935</div>
           </div>
         </div>
 
-        <!-- USSD Code Quick Box -->
-        <div class="text-right text-xs text-gray-300 space-y-2 bg-white/5 p-3 rounded-xl border border-white/5 mb-4">
-          <div class="font-bold text-gold-400 text-xs">كود التحويل السريع (من أي خط فودافون):</div>
+        <!-- USSD Code Box -->
+        <div class="text-xs text-gray-300 space-y-2 bg-white/5 p-3 rounded-xl border border-white/5 mb-4 ltr:text-left rtl:text-right">
+          <div class="font-bold text-gold-400 text-xs" data-i18n="vodaUssdHeader">Quick Transfer Code (Vodafone SIMs):</div>
           <div class="font-mono text-xs text-gold-300 bg-black/70 p-2.5 rounded-lg text-center border border-white/10 dir-ltr select-all font-bold">
-            *9*7*01034707935*المبلغ#
+            *9*7*01034707935*Amount#
           </div>
-          <p class="text-[10px] text-gray-400">أو استخدم تطبيق <b>Ana Vodafone</b> لإتمام عملية التحويل بسهولة.</p>
+          <p class="text-[10px] text-gray-400" data-i18n="vodaUssdNote">Or use Ana Vodafone App to complete your payment easily.</p>
         </div>
 
-        <button onclick="closeModal('vodafone-modal')" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-xs">
-          إغلاق النافذة
+        <button onclick="closeModal('vodafone-modal')" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-xs" data-i18n="vodaClose">
+          Close Window
         </button>
       </div>
     </div>
@@ -468,25 +474,25 @@
   <!-- SHARE & QR CODE MODAL -->
   <div id="qr-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity">
     <div class="glass-card w-full max-w-sm rounded-3xl p-5 relative border border-gold-500/40 shadow-2xl text-center">
-      <button onclick="closeModal('qr-modal')" class="absolute top-4 left-4 p-2 text-gray-400 hover:text-white rounded-full bg-white/5">
+      <button onclick="closeModal('qr-modal')" class="absolute top-4 ltr:right-4 rtl:left-4 p-2 text-gray-400 hover:text-white rounded-full bg-white/5">
         ✕
       </button>
 
       <div>
-        <h3 class="text-lg font-bold text-white mb-0.5">رمز QR الخاص بالصفحة</h3>
-        <p class="text-xs text-gray-300 mb-3.5">امسح الكود بكاميرا الموبايل لفتح الصفحة مباشرة</p>
+        <h3 class="text-lg font-bold text-white mb-0.5" data-i18n="qrModalTitle">Page QR Code</h3>
+        <p class="text-xs text-gray-300 mb-3.5" data-i18n="qrModalSub">Scan with your camera to open this profile</p>
 
-        <!-- Dynamic Dynamic QR Image -->
+        <!-- Dynamic QR Code Container -->
         <div class="w-48 h-48 mx-auto bg-white p-3 rounded-2xl shadow-2xl mb-4 flex items-center justify-center border-2 border-gold-400 relative">
           <img id="qr-code-img" src="" alt="Dr. Sushi Live QR Code" class="w-full h-full object-contain rounded-lg"/>
         </div>
 
         <div class="grid grid-cols-2 gap-2">
-          <button onclick="copyToClipboard(window.location.href, 'تم نسخ رابط الصفحة!')" class="py-2.5 px-2 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-black font-bold text-xs hover:opacity-90 transition-opacity active-scale">
-            نسخ رابط الصفحة
+          <button onclick="copyToClipboard(window.location.href)" class="py-2.5 px-2 rounded-xl bg-gradient-to-r from-gold-500 to-gold-400 text-black font-bold text-xs hover:opacity-90 transition-opacity active-scale" data-i18n="qrCopyLink">
+            Copy Page Link
           </button>
-          <button onclick="downloadQR()" class="py-2.5 px-2 rounded-xl bg-white/10 text-white font-medium text-xs hover:bg-white/20 transition-colors active-scale border border-white/10">
-            تحميل الرمز PNG
+          <button onclick="downloadQR()" class="py-2.5 px-2 rounded-xl bg-white/10 text-white font-medium text-xs hover:bg-white/20 transition-colors active-scale border border-white/10" data-i18n="qrDownload">
+            Download PNG
           </button>
         </div>
       </div>
@@ -497,16 +503,150 @@
   <!-- TOAST NOTIFICATION CONTAINER -->
   <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 glass-card px-4 py-2.5 rounded-full border border-gold-500/50 text-white text-xs font-medium shadow-2xl flex items-center gap-2 opacity-0 pointer-events-none transition-all duration-300">
     <span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span>
-    <span id="toast-message">تمت العملية بنجاح!</span>
+    <span id="toast-message">Operation successful!</span>
   </div>
 
 
-  <!-- JAVASCRIPT LOGIC -->
+  <!-- JAVASCRIPT LOGIC & BILINGUAL ENGINE -->
   <script>
-    // 1. Current Footer Year
+    // 1. Translations Dictionary
+    const translations = {
+      en: {
+        dir: 'ltr',
+        pageTitle: 'Dr. Sushi | Official Profile & Order Hub',
+        brandBadge: 'Dr. Sushi',
+        tagline: 'Artisan Japanese Cuisine • Unmatched Elegance',
+        status: 'Open for Orders • Express Delivery',
+        mainCtaSub: 'Online Store & Menu',
+        mainCtaBadge: 'ORDER NOW',
+        mainCtaTitle: 'Order Online / Browse Full Menu',
+        mainCtaDesc: 'Tap here to explore our menu and order directly',
+        waTitle: 'Direct WhatsApp Chat',
+        waDesc: 'Contact us for orders & inquiries',
+        vodaTitle: 'Vodafone Cash (Payment)',
+        vodaDesc: 'Wallet transfer & direct payment',
+        vodaCopy: 'Copy',
+        vodaCodeBtn: 'USSD Code',
+        instaTitle: 'Official Instagram Profile',
+        instaDesc: 'Exquisite dishes & daily stories',
+        fbTitle: 'Official Facebook Page',
+        fbDesc: 'Offers, reviews, and latest news',
+        rights: 'All rights reserved ©',
+        copyLinkText: 'Copy Hub Link',
+        qrText: 'QR Code',
+        // Modals & Notifications
+        vodaModalTitle: 'Pay via Vodafone Cash',
+        vodaModalSub: 'Transfer directly to Dr. Sushi wallet',
+        vodaWalletLabel: 'Wallet Number',
+        vodaUssdHeader: 'Quick Transfer Code (Vodafone SIMs):',
+        vodaUssdNote: 'Or use Ana Vodafone App to complete your payment easily.',
+        vodaClose: 'Close Window',
+        qrModalTitle: 'Page QR Code',
+        qrModalSub: 'Scan with your camera to open this profile',
+        qrCopyLink: 'Copy Page Link',
+        qrDownload: 'Download PNG',
+        toastCopiedUrl: 'Hub URL copied to clipboard!',
+        toastCopiedVoda: 'Vodafone Cash number (01034707935) copied!',
+        toastQrDownload: 'Downloading QR Code...',
+        toastSoundOn: 'Sound effects enabled 🔔',
+        toastBrand: 'Dr. Sushi • Artisan Quality & Japanese Elegance 🍣',
+        langBtnText: 'العربية'
+      },
+      ar: {
+        dir: 'rtl',
+        pageTitle: 'دكتور سوشي | الصفحة الرسمية وطلب الاوردرات',
+        brandBadge: 'دكتور سوشي',
+        tagline: 'أرقى تجربة سوشي ياباني • طعم الروعة والاحترافية',
+        status: 'مفتوح لاستقبال الطلبات • توصيل سريع',
+        mainCtaSub: 'المتجر الإلكتروني والمنيو',
+        mainCtaBadge: 'اطلب الآن',
+        mainCtaTitle: 'اطلب أونلاين / تصفح المنيو الكامل',
+        mainCtaDesc: 'اضغط هنا لاستعراض قائمة الطعام والطلب المباشر',
+        waTitle: 'محادثة واتساب مباشرة',
+        waDesc: 'تواصل معنا واستفسر فوراً عبر الواتساب',
+        vodaTitle: 'فودافون كاش (دفع)',
+        vodaDesc: 'تحويل المحفظة الإلكترونية والمبيعات',
+        vodaCopy: 'نسخ',
+        vodaCodeBtn: 'كود التحويل',
+        instaTitle: 'حساب انستجرام الرسمي',
+        instaDesc: 'صور الأطباق العصرية والستوريز اليومية',
+        fbTitle: 'صفحة الفيسبوك الرسمية',
+        fbDesc: 'عروض المطعم، التقييمات والأخبار',
+        rights: 'جميع الحقوق محفوظة ©',
+        copyLinkText: 'نسخ رابط الصفحة',
+        qrText: 'رمز QR',
+        // Modals & Notifications
+        vodaModalTitle: 'الدفع عبر فودافون كاش',
+        vodaModalSub: 'حوالات واستلام مبيعات دكتور سوشي المباشرة',
+        vodaWalletLabel: 'رقم المحفظة الإلكترونية',
+        vodaUssdHeader: 'كود التحويل السريع (من أي خط فودافون):',
+        vodaUssdNote: 'أو استخدم تطبيق Ana Vodafone لإتمام عملية التحويل بسهولة.',
+        vodaClose: 'إغلاق النافذة',
+        qrModalTitle: 'رمز QR الخاص بالصفحة',
+        qrModalSub: 'امسح الكود بكاميرا الموبايل لفتح الصفحة مباشرة',
+        qrCopyLink: 'نسخ رابط الصفحة',
+        qrDownload: 'تحميل الرمز PNG',
+        toastCopiedUrl: 'تم نسخ رابط الصفحة بنجاح!',
+        toastCopiedVoda: 'تم نسخ رقم فودافون كاش (01034707935)!',
+        toastQrDownload: 'جاري تحميل رمز QR...',
+        toastSoundOn: 'تم تفعيل التأثيرات الصوتية 🔔',
+        toastBrand: 'دكتور سوشي • الجودة والاحترافية اليابانية 🍣',
+        langBtnText: 'English'
+      }
+    };
+
+    let currentLang = 'en';
+
+    // Initialize Language from URL query param, saved preference, or browser settings
+    function initLanguage() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get('lang');
+      const savedLang = localStorage.getItem('drsushi_lang');
+      const browserLang = navigator.language && navigator.language.startsWith('ar') ? 'ar' : 'en';
+
+      if (urlLang === 'ar' || urlLang === 'en') {
+        currentLang = urlLang;
+      } else if (savedLang === 'ar' || savedLang === 'en') {
+        currentLang = savedLang;
+      } else {
+        currentLang = browserLang;
+      }
+
+      applyLanguage(currentLang);
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('drsushi_lang', lang);
+
+      const t = translations[lang];
+      document.documentElement.lang = lang;
+      document.documentElement.dir = t.dir;
+      document.title = t.pageTitle;
+
+      // Update all elements with data-i18n attribute
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) {
+          el.textContent = t[key];
+        }
+      });
+
+      // Update switcher button label
+      document.getElementById('lang-btn-text').textContent = t.langBtnText;
+    }
+
+    function toggleLanguage() {
+      const nextLang = currentLang === 'en' ? 'ar' : 'en';
+      applyLanguage(nextLang);
+      playChimeSound(780, 0.1);
+      showToast(nextLang === 'ar' ? 'تم تغيير اللغة إلى العربية' : 'Switched to English');
+    }
+
+    // Initialize footer year
     document.getElementById('year-el').textContent = new Date().getFullYear();
 
-    // 2. Multi-tier Image Fallback System (logo.jpg -> logo.png -> SVG Emblem)
+    // Image fallback logic: logo.jpg -> logo.png -> Inline SVG
     function handleImageError(img) {
       if (!img.dataset.triedPng) {
         img.dataset.triedPng = "true";
@@ -521,10 +661,10 @@
 
     function handleLogoClick() {
       playChimeSound(820, 0.15);
-      showToast("دكتور سوشي • الجودة والاحترافية اليابانية 🍣");
+      showToast(translations[currentLang].toastBrand);
     }
 
-    // 3. Floating Golden Embers Animation Canvas
+    // Floating Golden Embers Background Canvas
     const canvas = document.getElementById('ember-canvas');
     const ctx = canvas.getContext('2d');
     let width, height;
@@ -548,7 +688,7 @@
         this.speedY = Math.random() * 1.1 + 0.3;
         this.speedX = Math.random() * 0.6 - 0.3;
         this.opacity = Math.random() * 0.6 + 0.25;
-        this.color = Math.random() > 0.3 ? '#d4af37' : '#e62e43';
+        this.color = Math.random() > 0.3 ? '#d4af37' : '#e11d48';
       }
       update() {
         this.y -= this.speedY;
@@ -575,9 +715,8 @@
     }
     animateEmbers();
 
-
-    // 4. Safe Clipboard Copy for iframe & Mobile Browsers
-    function copyToClipboard(text, message) {
+    // Clipboard Copy Helper
+    function copyToClipboard(text, customMessage) {
       const textArea = document.createElement("textarea");
       textArea.value = text;
       textArea.style.position = "fixed";
@@ -589,20 +728,19 @@
       
       try {
         document.execCommand('copy');
-        showToast(message || "تم النسخ بنجاح!");
+        showToast(customMessage || translations[currentLang].toastCopiedUrl);
         playChimeSound(720, 0.1);
       } catch (err) {
-        showToast("تم النسخ: " + text);
+        showToast(text);
       }
       document.body.removeChild(textArea);
     }
 
     function copyVodafoneNumber(number) {
-      copyToClipboard(number, "تم نسخ رقم فودافون كاش (01034707935)!");
+      copyToClipboard(number, translations[currentLang].toastCopiedVoda);
     }
 
-
-    // 5. Toast Notification System
+    // Toast Notification System
     let toastTimeout;
     function showToast(msg) {
       const toast = document.getElementById('toast');
@@ -618,8 +756,7 @@
       }, 2500);
     }
 
-
-    // 6. Modal Drawer Functions & Live QR Code Generator
+    // Modal Drawer Logic
     function openModal(id) {
       if (id === 'qr-modal') {
         const currentUrl = encodeURIComponent(window.location.href);
@@ -642,11 +779,10 @@
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      showToast("جاري تحميل رمز QR...");
+      showToast(translations[currentLang].toastQrDownload);
     }
 
-
-    // 7. Audio Chime Synthesizer
+    // Sound Synthesizer
     let audioCtx = null;
     let isMuted = true;
 
@@ -656,7 +792,7 @@
       document.getElementById('sound-icon-off').classList.toggle('hidden', !isMuted);
 
       if (!isMuted) {
-        showToast("تم تفعيل التأثيرات الصوتية 🔔");
+        showToast(translations[currentLang].toastSoundOn);
         playChimeSound(880, 0.15);
       }
     }
@@ -677,8 +813,11 @@
         osc.stop(audioCtx.currentTime + duration);
       } catch (e) {}
     }
+
+    // On Load Initialization
+    window.onload = function() {
+      initLanguage();
+    };
   </script>
 </body>
 </html>
-
-  
